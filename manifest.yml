@@ -1,0 +1,73 @@
+app:
+  id: ari:cloud:ecosystem::app/da88cb16-0f1f-4739-b70a-aa7bfd61afc8
+  runtime:
+    architecture: arm64
+    memoryMB: 256
+    name: nodejs24.x
+modules:
+  rovo:agent:
+    - key: forge-rovo-action-context-echo-hello-world-agent
+      name: forge-rovo-action-context-echo
+      description: A simple agent to demonstrate the use of actions.
+      actions:
+        - fetch-comments
+        - add-comment
+      conversationStarters:
+        - add a comment to this issue
+        - summarise the comments on this issue
+      prompt: resource:agent-prompts;agent-instructions.md
+  action:
+    - key: fetch-comments
+      name: Fetch Comments from an Issue
+      description: Fetches comments from an issue.
+      actionVerb: GET
+      function: fetchComments
+      inputs:
+        issueId:
+          title: Issue Id
+          description: The issue id for the Jira issue id that the comments are being retrieved for.
+          required: true
+          type: string
+    - key: add-comment
+      name: Add Comment on an Issue
+      description: adds comment on an issue.
+      actionVerb: CREATE
+      function: addCommentToIssue
+      inputs:
+        comment:
+          title: Comment
+          description: The comment that needs to be added to the issue
+          required: true
+          type: string
+        issueId:
+          title: Issue Id
+          description: The issue id for the Jira issue id where a comments needs to be added
+          required: true
+          type: string
+  trigger:
+    - key: trigger-lifecycle
+      events:
+        - avi:forge:installed:app
+        - avi:forge:upgraded:app
+      function: lifecycle-handler
+  webtrigger:
+    - key: dev-trigger
+      function: trigger
+      response:
+        type: dynamic
+  function:
+    - key: fetchComments
+      handler: index.fetchComments
+    - key: addCommentToIssue
+      handler: index.addComment
+    - key: trigger
+      handler: index.trigger
+    - key: lifecycle-handler
+      handler: index.lifecycle
+permissions:
+  scopes:
+    - write:jira-work
+    - read:jira-work
+resources:
+  - key: agent-prompts
+    path: prompts
