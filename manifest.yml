@@ -6,43 +6,25 @@ app:
     name: nodejs24.x
 modules:
   rovo:agent:
-    - key: forge-rovo-action-context-echo-hello-world-agent
-      name: forge-rovo-action-context-echo
-      description: A simple agent to demonstrate the use of actions.
+    - key: forge-rovo-action-request-echo
+      name: Request Echoer
+      description: A utility to echo a request to Rovo and expose the current Rovo context object
       actions:
-        - fetch-comments
-        - add-comment
+        - echo-request
       conversationStarters:
-        - add a comment to this issue
-        - summarise the comments on this issue
+        - Echo the current request
       prompt: resource:agent-prompts;agent-instructions.md
   action:
-    - key: fetch-comments
-      name: Fetch Comments from an Issue
-      description: Fetches comments from an issue.
+    - key: echo-request
+      name: Echo request
+      description: Echos the current Rovo request into the Chat.
       actionVerb: GET
-      function: fetchComments
+      function: echoRequest
       inputs:
-        issueId:
-          title: Issue Id
-          description: The issue id for the Jira issue id that the comments are being retrieved for.
-          required: true
-          type: string
-    - key: add-comment
-      name: Add Comment on an Issue
-      description: adds comment on an issue.
-      actionVerb: CREATE
-      function: addCommentToIssue
-      inputs:
-        comment:
-          title: Comment
-          description: The comment that needs to be added to the issue
-          required: true
-          type: string
-        issueId:
-          title: Issue Id
-          description: The issue id for the Jira issue id where a comments needs to be added
-          required: true
+        message:
+          title: Message
+          description: Any string that should be attached to the reqeust as echo text.
+          required: false
           type: string
   trigger:
     - key: trigger-lifecycle
@@ -56,18 +38,12 @@ modules:
       response:
         type: dynamic
   function:
-    - key: fetchComments
-      handler: index.fetchComments
-    - key: addCommentToIssue
-      handler: index.addComment
+    - key: echoRequest
+      handler: index.echoRequest
     - key: trigger
       handler: index.trigger
     - key: lifecycle-handler
       handler: index.lifecycle
-permissions:
-  scopes:
-    - write:jira-work
-    - read:jira-work
 resources:
   - key: agent-prompts
     path: prompts

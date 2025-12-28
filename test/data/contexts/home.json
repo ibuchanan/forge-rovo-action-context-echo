@@ -1,0 +1,18 @@
+{
+  "message": "Echo the current request",
+  "rovo_context": {
+    "user": {
+      "name": "Ian Buchanan",
+      "profile_url": "/people/ari:cloud:identity::user/557057:3d0e64ae-35d3-490d-b6d9-d81c981476d0",
+      "location": "Home Office: Texas, United States.",
+      "job_title": "Principal Developer Solutions Consultant",
+      "department": "Solutions Strategy & Ops",
+      "organization": "Atlassian"
+    },
+    "current_time": "2025-12-28 19:40:31 UTC",
+    "current_url": "https://one-atlas-iire.atlassian.net/wiki/home",
+    "tenant_context": {
+      "graphWorkspaceAri": "ari:cloud:graph::workspace/d4498d1a-a10e-4bba-84d8-0c90d41802b9"
+    }
+  }
+}
