@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,en-GB",
+  "words": [
+    "actionpayload",
+    "actiontypes",
+    "evals",
+    "postfunction",
+    "promptfoo",
+    "promptfooconfig",
+    "rovo",
+    "webtrigger"
+  ],
+  "ignorePaths": ["node_modules", "package-lock.json"]
+}

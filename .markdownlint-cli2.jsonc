@@ -1,0 +1,15 @@
+{
+  // MD013 (line-length) is disabled: this repo writes prose in long lines
+  // rather than hard-wrapping, consistent with the existing docs.
+  "config": {
+    "default": true,
+    "MD013": false
+  },
+  "ignores": [
+    // AI agent instructions and prompts, not human-facing documentation.
+    "AGENTS.md",
+    "prompts/**",
+    // Synthetic test fixtures, not documentation.
+    "test/data/**"
+  ]
+}
